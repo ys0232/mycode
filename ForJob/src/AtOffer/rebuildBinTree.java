@@ -21,29 +21,24 @@ public class rebuildBinTree {
     TreeNode root=reConstructBinaryTree(pre,in);
     printTreeBFS(root);
     }
-    public static TreeNode reConstructBinaryTree(int [] pre,int [] in) {
-       TreeNode root=new TreeNode(pre[0]);
-       TreeNode q=root;
-       int temp=pre[0];
-       for (int i=1;i<pre.length;i++){
-           TreeNode p=new TreeNode(pre[i]);
-           int flag=-1;
-           for (int j:in){
-                if (in[j]==temp){
-                    flag=1;
-                }
-                if (in[j]==pre[i]){
-                    break;
-                }
-           }
-           if (flag==-1){
-            q.left=p;
-            q=q.left;
-           }else {
-               q.right=p;
-           }
-           temp=pre[i];
-       }
+    private static TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+       TreeNode root;
+       if (pre.length==0 || in.length==0)
+           return null;
+       root=reConstructTree(pre,in,0,pre.length-1,0,in.length-1);
+        return root;
+    }
+   private static TreeNode reConstructTree(int [] pre,int [] in,int startpre,int endpre,int startin,int endin) {
+        if (pre.length==0 || in.length==0)return null;
+        if (startin>endin || startpre>endpre)return null;
+        TreeNode root=new TreeNode(pre[startpre]);
+        for (int i=startin;i<=endin;i++){
+            if (pre[startpre]==in[i]){
+                root.left=reConstructTree(pre,in,(startpre+1),i-startin+startpre,startin,i-1);
+                root.right=reConstructTree(pre,in,i-startin+startpre+1,endpre,i+1,endin);
+                break;
+            }
+        }
         return root;
     }
     public static void printTreeBFS(TreeNode root){

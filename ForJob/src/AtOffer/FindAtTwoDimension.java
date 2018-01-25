@@ -1,6 +1,4 @@
 package AtOffer;
-
-import java.awt.*;
 import java.util.Arrays;
 
 /**
@@ -13,12 +11,12 @@ public class FindAtTwoDimension {
         for (int[] i : a) {
             System.out.println(Arrays.toString(i));
         }
-        System.out.println(Find(t, a));
+        int[][] b={{}};
+        System.out.println(Find(t, a)+"\t"+BetterFind(t,b));
     }
 
     private static boolean Find(int target, int[][] array) {
         int len = array.length;
-        boolean flag = false;
         for (int i = 0; i < len; i++) {
             int low = 0, high = array[0].length - 1;
             while (low <= high) {
@@ -32,7 +30,21 @@ public class FindAtTwoDimension {
             }
             //System.out.println(low + "\t" + high);
         }
-        return flag;
+        return false;
+    }
+    private static boolean BetterFind(int target,int[][] array){
+       // if (array[0].length==0)return false;
+        int len1=array.length;
+        int i=len1-1,j=0;
+        //System.out.println(len1+"\t"+i);
+        while (i>=0 && i<len1 && j>=0 && j<array[0].length){
+            if (target==array[i][j]){
+                return true;
+            }else if (target<array[i][j]){
+                i--;
+            }else j++;
+        }
 
+        return false;
     }
 }

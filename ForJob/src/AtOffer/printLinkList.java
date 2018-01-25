@@ -34,9 +34,11 @@ public class printLinkList {
         }
         p=p.next;
     }
-        ArrayList<Integer> r=printListFromTailToHead(root);
-        ArrayList<Integer> r1=printListFromTailToHead(p);
+       p=root;
+       ArrayList<Integer> r=printListFromTailToHead(p);
+        ArrayList<Integer> r1=printFromTailToHead(root);
         System.out.println();
+        System.out.println(Arrays.toString(r.toArray()));
         System.out.println(Arrays.toString(r1.toArray()));
        // System.out.print();
 
@@ -60,5 +62,17 @@ public class printLinkList {
             p=p.next;
         }
         return result;
+    }
+    static ArrayList<Integer> printFromTailToHead(ListNode listNode){
+        ArrayList<Integer> list=new ArrayList<>();
+        //if (listNode==null)return list;
+        ListNode p=listNode;
+        if (p!=null){
+            if (p.next!=null){
+                list=printFromTailToHead(p.next);
+            }
+            list.add(p.val);
+        }
+        return list;
     }
 }
