@@ -27,6 +27,8 @@ public class PrintFromTopToBottom {
         }
     ArrayList<Integer> r=printFromTopToBottom(root);
        System.out.println("===============\n"+r.toString());
+        r=printFromTtoB(root);
+        System.out.println("===============\n"+r.toString());
     }
     private static ArrayList<Integer> printFromTopToBottom(TreeNode root){
         ArrayList<Integer> result=new ArrayList<>();
@@ -54,6 +56,19 @@ public class PrintFromTopToBottom {
                     temp=p.right.val;
             }
             nlast=temp;
+        }
+        return result;
+    }
+    private static ArrayList<Integer> printFromTtoB(TreeNode root){
+        ArrayList<Integer> result=new ArrayList<>();
+        ArrayList<TreeNode> queue=new ArrayList<>();
+        if (root==null) return result;
+        queue.add(root);
+        while (!queue.isEmpty()){
+            TreeNode temp = queue.remove(0);
+            result.add(temp.val);
+            if (temp.left!=null)queue.add(temp.left);
+            if (temp.right!=null)queue.add(temp.right);
         }
         return result;
     }

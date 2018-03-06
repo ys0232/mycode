@@ -16,23 +16,17 @@ public class PrintMatrix {
     }
     private static ArrayList<Integer> printMatrix(int[][] matrix){
         ArrayList<Integer> result=new ArrayList<>();
-        int len=matrix.length,count=len*len;
-        int i=0,j=0;
-        while (count>0){
-            if(i==0 && j<len){
-                result.add(matrix[i][j]);
-                j++;
-            }else if (j==len && i<len && i>0){
-                result.add(matrix[i][j-1]);
-                i++;
-            }else if (i==len && j==len){
-                result.add(matrix[i-1][j]);
-                j--;
-            }else if (j==0 && i>0){
-                result.add(matrix[i][j-1]);
-                i--;
-            }
-
+        int row=matrix.length; int col=matrix[0].length;
+        if (row==0 || col==0)return result;
+        int left=0,top=0,right=col-1,bottom=row-1;
+        while (left<=right && top <= bottom){
+            for (int i=left;i<=right;i++) result.add(matrix[top][i]);
+            for (int i=top+1;i<=bottom;i++) result.add(matrix[i][right]);
+            if (top!=bottom)
+                for (int i=right-1;i>=left;i--)result.add(matrix[bottom][i]);
+            if (left!=right)
+                for (int i=bottom-1;i>top;i--) result.add(matrix[i][left]);
+            left++;top++;right--;bottom--;
         }
 
         return result;

@@ -26,7 +26,8 @@ public class TreeMirror {
                 p=q.right;
             }
         }
-        Mirror(root);
+       // Mirror(root);
+        M2(root);
         PrintTree(root);
     }
     private static void Mirror(TreeNode root){
@@ -50,6 +51,16 @@ public class TreeMirror {
             }
             }
         }
+
+
+    }
+    private static void M2(TreeNode root){
+        if (root==null) return;
+        TreeNode temp=root.left;
+        root.left=root.right;
+        root.right=temp;
+        if (root.left!=null)M2(root.left);
+        if (root.right!=null)M2(root.right);
 
 
     }

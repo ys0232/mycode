@@ -7,6 +7,7 @@ public class MoreThanHalfNum {
     public static void main(String[] args){
         int[] a={1,2,3,2,2,2,5,4,2};
         System.out.println(MoreThanHalfNum_Solution(a));
+        System.out.println(MoreThanHalfNum(a));
     }
     private static int MoreThanHalfNum_Solution(int[] array){
       if (array.length<1)return 0;
@@ -27,4 +28,25 @@ public class MoreThanHalfNum {
         }
         return b[index];
     }
+    private static int MoreThanHalfNum(int[] array){
+        if(array.length==0)return 0;
+        int num=array[0];
+        int count=0;
+        for (int i:array){
+            if (i==num){
+                count++;
+            }else count--;
+            if (count==0){
+                num=i;count=1;
+            }
+        }
+        count=0;
+        for (int i:array){
+            if (i==num)count++;
+        }
+        if (count>array.length/2) return num;
+        else return 0;
+
+    }
+
 }

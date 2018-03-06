@@ -9,8 +9,8 @@ import java.util.Queue;
  */
 public class isSubTree {
     public static void main(String[] args){
-        int[] a={1,2,3,4,5,6,7};
-        int[] b={1,2,3};
+        int[] a={8,8,7,9,2,1,0,0,0,4,7};
+        int[] b={8,9,2};
         TreeNode rootA,rootB,node,right;
         rootA=new TreeNode(a[0]);
         rootB=new TreeNode(b[0]);
@@ -49,44 +49,19 @@ public class isSubTree {
         System.out.println(HasSubtree(rootA,rootB));
     }
     private static boolean HasSubtree(TreeNode root1,TreeNode root2){
-        if (root2==null)return false;
-        TreeNode node=root1,node1=root2;
-        int flag=-1,flag1=-1;
-        boolean f=false,flast=false;
-        while (node!=null && node1!=null){
-            f=false;
-            System.out.println(node.val+"\t"+node1.val);
-            if (node.val==node1.val){
-                f=true;
-                if (flag==-1){
-                    root1=node;
-                    root2=node1;
-                    node=node.left;
-                    node1=node1.left;
-                    flag=1;
-                }else {
-                    node=root1.right;
-                    node1=root2.right;
-                    flag=-1;
-                }
-            }else if (flag1==-1){
-                root1=node;
-                node=node.left;
-                flag1=1;
-            }else {
-                node=root1.right;
-                flag=-1;
-            }
-            if (f){
-                flast=true;
-            }
-            if (f!=flast){
-               return false;
-            }
+        if (root1==null || root2==null)return false;
+        return isSubtree(root1,root2) || HasSubtree(root1.left,root2) || HasSubtree(root1.right,root2);
 
-        }
-        return node1==null;
     }
+    private static boolean isSubtree(TreeNode root1,TreeNode root2){
+        if (root2==null) return true;
+        if (root1==null ) return false;
+        System.out.println(root1.val+"\t"+root2.val);
+        if (root1.val == root2.val){
+            return isSubtree(root1.left,root2.left) && isSubtree(root1.right,root2.right);
+        }else return false;
+    }
+
     private static void printTreeBFS(TreeNode root){
         Queue<TreeNode> queue=new LinkedList<>();
         queue.offer(root);
