@@ -61,7 +61,7 @@ public class bigIntegerMultiply {
             long result = Long.valueOf(a) * Long.valueOf(b);
             return String.valueOf(result);
         } else {
-            int len = a.length() > b.length() ? a.length() : b.length();
+            int len = a.length() < b.length() ? a.length() : b.length();
             int lena = a.length();
             int lenb = b.length();
             String a1 = a.substring(0, lena - len / 2 - 1);

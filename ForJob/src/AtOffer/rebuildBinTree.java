@@ -5,15 +5,7 @@ import java.util.Queue;
 /**
  * Created by lenovo on 2018/1/13.
  */
-class TreeNode {
-    int val = 0;
-    TreeNode left = null;
-    TreeNode right = null;
 
-    public TreeNode(int val) {
-        this.val = val;
-    }
-}
 public class rebuildBinTree {
     public static void main(String[] args){
     int[] pre={1,2,4,7,3,5,6,8};
