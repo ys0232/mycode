@@ -31,6 +31,22 @@ public class SumOfLongestSubstring {
         System.out.print(a[i]+"\t");
     }
     System.out.println("\n"+max);
+        System.out.println(maxSubArray(a));
+    }
+    private static int maxSubArray(int[] A){
+        int res=Integer.MIN_VALUE;
+        int temp=0;
+        for (int i=0;i<A.length;i++){
+            temp+=A[i];
+            if (temp>res){
+                res=temp;
+            }
+            if (temp<0){
+                temp=0;
+            }
+        }
+        return res;
+
     }
 
 }

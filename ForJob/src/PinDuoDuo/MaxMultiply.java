@@ -1,4 +1,5 @@
 package PinDuoDuo;
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,48 +11,43 @@ import java.util.Scanner;
 public class MaxMultiply {
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-       /* while (sc.hasNext()) {
-            int n = sc.nextInt();
-            int[] arr = new int[n];
-            for (int i = 0; i < n; i++)
-                arr[i] = sc.nextInt();
+           ArrayList<Integer> arr=new ArrayList<>();
+           while (sc.hasNext()){
+               int t=sc.nextInt();
+                arr.add(t);
+           }
             System.out.println(multiply(arr));
-        }*/
-        String s1="892";String s2="31324";
-      //  Bigmultiply(s1,s2);
-        System.out.println(s1+"\t"+s2+"\n"+Bigmultiply(s1,s2));
     }
-    private static String multiply(int[] arr){
-        String mul="1";int count=0;
-        int[] min=new int[3];
-        for (int i=0;i<arr.length;i++){
-            if (count<3){
-                mul=Bigmultiply(mul,String.valueOf(arr[i]));
-                min[count]=arr[i];
-                count++;
-            }else {
-                String temp=mul;
-                for (int j=0;j<min.length;j++){
-                    if (min[j]!=0){
-                 //  temp=Bigdivide(temp,String.valueOf(min[j]));
-                   temp=Bigmultiply(temp,String.valueOf(arr[i]));
-                    }else {
-                        temp=String.valueOf(arr[i]);
-                        for (int k=0;k<min.length;k++){
-                            if (min[k]!=0)
-                            temp=Bigmultiply(String.valueOf(min[k]),temp);
-                        }
-                    }
-                   if (temp.compareTo(mul)>0){
-                       mul=temp;
-                       min[j]=arr[i];
-                   }
+    private static long multiply(ArrayList<Integer> arr){
+        long max=0;
+        long[] max_t=new long[3];
+        long[] min_t=new long[2];
+        min_t[0]=Long.MAX_VALUE;
+        min_t[1]=Long.MAX_VALUE;
+        for (int i=0;i<max_t.length;i++)
+            max_t[i]=Integer.MIN_VALUE;
+        for (int i=0;i<arr.size();i++){
+            if (max_t[0]<arr.get(i)){
+                max_t[2]=max_t[1];
+                max_t[1]=max_t[0];
+                max_t[0]=arr.get(i);
+            }else if (max_t[1]<arr.get(i)){
+                max_t[2]=max_t[1];
+                max_t[1]=arr.get(i);
+            }else if (max_t[2]<arr.get(i)){
+                max_t[2]=arr.get(i);
+            }
+            if (min_t[0]>arr.get(i)){
+                min_t[1]=min_t[0];
+                min_t[0]=arr.get(i);
+            }else if (min_t[1]>arr.get(i)){
+                min_t[1]=arr.get(i);
             }
         }
-        }
-        System.out.println(mul+"\t"+ Arrays.toString(min));
+        max=Math.max(min_t[0]*min_t[1],max_t[1]*max_t[2])*max_t[0];
+        System.out.println(Arrays.toString(max_t)+"\n"+Arrays.toString(min_t));
 
-        return mul;
+        return max;
     }
     private static String Bigmultiply(String s1,String s2){
         System.out.println(s1+"\t"+s2);
