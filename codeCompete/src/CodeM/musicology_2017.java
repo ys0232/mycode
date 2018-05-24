@@ -16,19 +16,20 @@ public class musicology_2017 {
             }
             int len2=sc.nextInt();
             int[] b=new int[len2];
-            int min=Integer.MAX_VALUE;
+
             for (int i=0;i<len2;i++){
                 b[i]=sc.nextInt();
             }
-
-            for (int i=0;i<len2-len1;i++){
-                int sum=0;int k=i;
-                for (int j=0;j<len1;j++){
-                    sum+=(a[j]-b[k])*(a[j]-b[k]);
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i < len2 - len1; i++) {
+                int sum = 0;
+                int k = i;
+                for (int j = 0; j < len1; j++) {
+                    sum += (a[j] - b[k]) * (a[j] - b[k]);
                     k++;
                 }
-                if (min>sum){
-                    min=sum;
+                if (min > sum) {
+                    min = sum;
                 }
             }
             System.out.println(min);
