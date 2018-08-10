@@ -8,11 +8,10 @@ public class RelativelyPrime_2017Aans {
         int n = sc.nextInt();
         int m = sc.nextInt();
         int[] a = new int[n + 1];
-        int maxid = -1, minid = 50000;
+        int maxid = -1;
         for (int i = 1; i <= n; i++) {
             a[i] = sc.nextInt();
             maxid = maxid > a[i] ? maxid : a[i];
-            minid = minid < a[i] ? minid : a[i];
         }
         for (int i = 1; i <= m; i++) {
             int[] vis = new int[maxid + 1];
